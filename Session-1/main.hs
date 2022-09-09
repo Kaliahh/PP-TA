@@ -4,9 +4,13 @@ second [x] = Nothing
 second (_:y:rest) = Just y
 
 second' :: [a] -> a
-second' [] = error "Empty list"
-second' [x] = error "No second element"
+second' [] = error "Empty list!"
+second' [x] = error "No second element!"
 second' (_:y:_) = y
+
+second'' :: [a] -> a
+second'' [] = error "Empty list!"
+second'' (_ : rest) = head rest
 
 secondinlist :: [a] -> [a]
 secondinlist [] = []
@@ -18,24 +22,17 @@ allbutsecond [] = []
 allbutsecond [x] = [x]
 allbutsecond (x:_:rest) = x : rest
 
-midtover :: (Num b) => [a] -> b -> ([a], [a])
-midtover [] _ = ([], [])
--- midtover [x, y] _ = ([x], [y])
-midtover (x:rest) n | n > 0 = ()
+midtover :: [a] -> Int -> ([a], [a])
+midtover list n = splitAt half list
+  where half = div n 2
 
--- midtover (x:rest) n = (take (n `div` 2) (x:rest), reverse (take (n `div` 2) (reverse rest)))
+midtover' :: [a] -> ([a], [a])
+midtover' list = splitAt half list
+  where half = div (length list) 2
 
+midtover'' :: [a] -> Int -> ([a], [a])
+midtover'' list n = (take half list, drop half list)
+  where half = div n 2
 
--- midtoverHelper 
-
--- midtoverHelper :: (Num a, Ord a) => [b] -> a -> a -> [a] -> ([a], [a])
--- midtoverHelper (x:rest) len current result | current < len `div` 2 = 
-
-
--- midtover' :: [a] -> ([a], [a])
--- midtover' list = midtoverHelper list (length list `div` 2) (length list)
-
--- midtoverHelper :: (Num b, Ord b, Integral c) => [a] -> c -> b -> ([a], [a])
--- midtoverHelper [] _ _ = ([], [])
--- midtoverHelper [x, y] _ _ = ([x], [y])
--- midtoverHelper (x:rest) half current | current >= half = midtoverHelper rest half (current - 1) 
+last' :: [a] -> a
+last' list = head (reverse list)
