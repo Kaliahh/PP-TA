@@ -15,6 +15,9 @@ second'' (_ : rest) = head rest
 second''' :: [a] -> a
 second''' list = head (tail list)
 
+second'''' :: [a] -> a
+second'''' list = list !! 1
+
 secondInList :: [a] -> [a]
 secondInList [] = []
 secondInList [x] = []
