@@ -12,15 +12,28 @@ second'' :: [a] -> a
 second'' [] = error "Empty list!"
 second'' (_ : rest) = head rest
 
-secondinlist :: [a] -> [a]
-secondinlist [] = []
-secondinlist [x] = []
-secondinlist (_:y:_) = [y]
+second''' :: [a] -> a
+second''' list = head (tail list)
+
+secondInList :: [a] -> [a]
+secondInList [] = []
+secondInList [x] = []
+secondInList (_:y:_) = [y]
+
+secondInList' :: [a] -> [a]
+secondInList' [] = []
+secondInList' [x] = []
+secondInList' list = [head (tail list)]
 
 allbutsecond :: [a] -> [a]
 allbutsecond [] = []
 allbutsecond [x] = [x]
 allbutsecond (x:_:rest) = x : rest
+
+allbutsecond' :: [a] -> [a]
+allbutsecond' [] = []
+allbutsecond' [x] = [x]
+allbutsecond' list = head list : tail (tail list)
 
 midtover :: [a] -> Int -> ([a], [a])
 midtover list n = splitAt half list
