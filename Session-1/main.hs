@@ -1,7 +1,7 @@
 second :: [a] -> Maybe a
 second [] = Nothing
 second [x] = Nothing
-second (_:y:rest) = Just y
+second (_ : y : rest) = Just y
 
 second' :: [a] -> a
 second' [] = error "Empty list!"
@@ -31,7 +31,7 @@ secondInList' list = [head (tail list)]
 allbutsecond :: [a] -> [a]
 allbutsecond [] = []
 allbutsecond [x] = [x]
-allbutsecond (x:_:rest) = x : rest
+allbutsecond (x : _ : rest) = x : rest
 
 allbutsecond' :: [a] -> [a]
 allbutsecond' [] = []
