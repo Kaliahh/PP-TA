@@ -1,9 +1,9 @@
 onlyTwo :: [a] -> Bool
-onlyTwo [x, y] = True
+onlyTwo [_, _] = True
 onlyTwo _ = False
 
 alldots :: Num t => [(t, t)] -> [(t, t)] -> [t]
-alldots as bs = [dot a b | a <- as, b <- bs]
+alldots as bs = [dot x y | x <- as, y <- bs]
   where
     dot (a, b) (c, d) = a * c + b * d
 
