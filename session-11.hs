@@ -85,10 +85,6 @@ term :: Parser Rexp
 term =
   do
     b <- base
-    -- case b of
-    --   A -> many (do symbol "a")
-    --   B -> many (do symbol "b")
-    --   _ -> many (do base)
     symbol "*"
     return (Star b)
     <|> do
