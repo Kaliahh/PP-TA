@@ -1,0 +1,154 @@
+length (xs ++ ys) = length xs + length ys
+
+
+Base: xs = []
+
+length ([] ++ ys) 
+= length ys
+
+-- length ([] ++ ys) = length [] + length ys = 0
+-- length ys = 0 + length ys
+
+
+Inductive: xs = (z:zs)
+
+length ((z:zs) ++ ys) 
+= length (z:zs) + length ys
+
+-- length ((z:zs) ++ ys) = length (z:zs) + length ys
+-- length (z:zs) + length ys = legnth (z:zs) + length ys
+
+?????
+
+
+
+
+
+bingo :: Tree -> Integer
+bingo (Leaf n) = 1
+bingo (Node l r) = bingo l + bingo r
+
+
+length (flatten t) = bingo t
+
+Base: t = Leaf n
+
+length (flatten (Leaf n)) 
+= length [n]
+= 1
+
+-- length (flatten (Leaf n)) = bingo (Leaf n)
+-- length [n] = 1
+-- 1 = 1
+
+
+Inductive: t = Node l r
+
+length (flatten (Node l r))
+= length (flatten l ++ length flatten r)
+= length (flatten l) + length (flatten r)
+= bingo l + bingo r
+
+-- length (flatten (Node l r)) = bingo (Node l r)
+-- length (flatten l ++ flatten r) = bingo l + bingo r
+-- length (flatten l) + length (flatten r) = bingo l + bingo r
+-- bingo l + bingo r = bingo l + bingo r
+
+?????
+
+
+
+length (reverse xs) = length xs
+
+Base: xs = []
+
+length (reverse [])
+= length []
+= 0
+
+-- length (reverse []) = length []
+-- length [] = 0
+-- 0 = 0
+
+Inductive: xs = (z:zs)
+
+length (reverse (z:zs)) 
+= length (reverse zs ++ [z])
+= length (reverse zs) + length [z]
+= length zs + length [z]
+= length zs + 1 
+
+-- length (reverse (z:zs)) = length (z:zs)
+
+-- length (reverse zs ++ [z]) = length (z:zs)
+
+-- length (reverse zs) + length [z] = length (z:zs)
+
+-- length (zs) + length [z] = length (z:zs)
+
+-- length (zs) + 1 = length (z:zs)
+
+
+????
+
+
+data Tree a = Leaf a | Node (Tree a) (Tree a)
+
+instance Functor Tree where 
+ -- fmap :: (a -> b) -> Tree a -> Tree b
+fmap g (Leaf x) = Leaf (g x)
+fmap g (Node l r) = Node (fmap g l) (fmap g r)
+
+Love side 236:
+fmap id = id 
+fmap (g . h) = fmap g . fmap h
+
+
+Lov 1:
+Base: 
+
+fmap id (Leaf x)
+= Leaf (id x) 
+= Leaf x
+
+id (Leaf x)
+= Leaf x
+
+
+
+Inductive:
+
+fmap id (Node l r)
+= Node (fmap id l) (fmap id r)
+= Node (id l) (id r)
+= Node l r
+
+id (Node l r) = Node l r
+
+
+
+Lov 2:
+Base:
+
+fmap (g . h) (Leaf x)
+= Leaf ((g . h) x)
+= Leaf (g (h (x)))
+
+(fmap g) . (fmap h) (Leaf x) 
+= (fmap g) (Leaf (h (x)))
+= Leaf (g (h (x)))
+
+Inductive:
+
+fmap (g . h) (Node l r)
+= Node (fmap (g . h) l) (fmap (g . h) r)
+= Node ((fmap g) ((fmap h) l)) ((fmap g) ((fmap h) r))
+
+
+?????????????????????????
+
+
+fib 0 = 1
+fib 1 = 1
+fib b = fib (n - 1) + fib (n - 2)
+
